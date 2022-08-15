@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment.prod';
 import { SharedService } from './shared/shared.service';
 import { AppService } from './app.service';
 import { Router } from '@angular/router';
@@ -15,6 +16,9 @@ export class AppComponent implements OnInit {
   constructor(private appService: AppService) {}
 
   ngOnInit(): void {
+    if (environment.production) {
+      console.log = function () {};
+    }
     this.appService.userLoginStatus.subscribe({
       next: (response: any) => {
         if (response && response.status) {

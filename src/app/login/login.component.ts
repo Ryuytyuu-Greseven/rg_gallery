@@ -97,7 +97,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       ) {
         this.login();
       }
-    } else if (!this.isLogin && this.otpVerified === 'no') {
+    } else if (
+      !this.isLogin &&
+      this.otpVerified === 'no' &&
+      this.loginForm.get('email')?.valid
+    ) {
       this.otpVerified = 'inprogress';
       this.verifyEmails();
     } else {
