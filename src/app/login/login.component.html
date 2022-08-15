@@ -1,0 +1,90 @@
+<div class="row">
+  <div class="col-md-0 col-sm-0 col-0">
+
+  </div>
+  <div class="col-md-4 col-sm-8 col-8">
+    <div class="login">
+      <div class="text-center">
+        <h1 class="brand-name">SPACE COLLAGE</h1>
+      </div>
+
+      <ng-container>
+        <form [formGroup]="loginForm">
+          <div class="row" *ngIf="otpVerified === 'no'">
+            <div class="col col-md-12 col-sm-12">
+              <label for="email">Email</label>
+              <input class="form-control" (keyup.enter)="checkFormState()" autocomplete="off" formControlName="email"
+                type="email" id="email" placeholder="Enter Account Email ID">
+            </div>
+          </div>
+          <div class="row" *ngIf="otpVerified === 'inprogress'">
+            <div class="col col-md-12 col-sm-12">
+              <label for="otp">OTP Verification</label>
+              <input class="form-control" (keyup.enter)="checkOtp()" autocomplete="off" formControlName="otp"
+                type="text" id="otp" placeholder="Enter OTP">
+            </div>
+          </div>
+          <div class="row" *ngIf="otpVerified === 'yes' && !userIdVerified">
+            <div class="col col-md-12 col-sm-12">
+              <label for="user_id">Choose User ID</label>
+              <input class="form-control" (keyup.enter)="checkUserId()" autocomplete="off" formControlName="user_id"
+                type="text" id="user_id" placeholder="Enter User ID">
+            </div>
+          </div>
+          <div class="row" *ngIf="!isLogin && userIdVerified">
+            <div class="col col-md-12 col-sm-12">
+              <label for="profile-name">Profile Name</label>
+              <input class="form-control" autocomplete="off" formControlName="profile_name" type="text"
+                id="profile-name" placeholder="Enter Profile Name">
+            </div>
+          </div>
+          <div class="row" *ngIf="isLogin || userIdVerified">
+            <div class="col col-md-12 col-sm-12">
+              <label for="password-key">Password</label>
+              <input class="form-control" (keyup.enter)="checkFormState()" autocomplete="off" formControlName="password"
+                type="password" id="password-key" placeholder="Enter Account Password">
+            </div>
+          </div>
+          <div class="row" *ngIf="!isLogin && userIdVerified">
+            <div class="col col-md-12 col-sm-12">
+              <label for="check-password-key">Re-Enter Password</label>
+              <input class="form-control" (keyup.enter)="checkFormState()" autocomplete="off"
+                formControlName="check_password" type="password" id="check-password-key"
+                placeholder="Re-Enter Account Password">
+            </div>
+          </div>
+        </form>
+      </ng-container>
+
+      <div class="row">
+        <div class="col col-md-6 col-sm-6">
+          <button class="publish signup" (click)="checkFormState()"
+            *ngIf="!isLogin && otpVerified !== 'inprogress' && userIdVerified">{{'Sign Up'}}</button>
+          <button class="publish signup" (click)="checkFormState()" *ngIf="isLogin">Login</button>
+          <button class="publish signup" (click)="checkFormState()" *ngIf="!isLogin && otpVerified === 'no'">Verify
+            Email</button>
+          <button class="publish signup" (click)="checkOtp()" *ngIf="otpVerified === 'inprogress'">Verify OTP</button>
+          <button class="publish signup" (click)="checkUserId()" *ngIf="otpVerified === 'yes' && !userIdVerified">Check
+            User
+            ID</button>
+        </div>
+        <div class="col col-md-6 col-sm-6 reaction-share">
+          <button class="publish signup" (click)="switchLog()">Switch</button>
+        </div>
+      </div>
+      <div class="alert alert-danger signup" role="alert" *ngIf="errorMessage">
+        {{errorMessage ? errorMessage : ''}}
+      </div>
+      <!-- <div class="alert alert-danger signup" role="alert">
+        Account already exists
+      </div>
+      <div class="alert alert-danger signup" role="alert">
+        Account Credentials Doesn't
+      </div> -->
+    </div>
+
+  </div>
+  <div class="col-md-4 col-sm-0 col-2">
+
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="post-card">
+  <div class="user-logo">
+    <img src="../../../assets//nebula.jpg" class="profile-thumbnail" alt="">
+    <span
+      class="user-logo-name">{{artPost?.profile_details?.length ? artPost?.profile_details?.[0].artist_name : 'Unknown Artist'}}</span>
+  </div>
+  <img [src]="imageSrc" class="post-card-image">
+  <div class="post-card-description">
+    <span
+      class="description">{{artPost?.description ? artPost?.description : 'Tries a bit different this time.'}}</span>
+  </div>
+  <div class="post-card-reactions">
+    <a class="reaction-up-vote" [ngClass]="{'active':userVote === 1,'text-tooltip':artPost?.upvotes>0}"
+      (click)="onUpvote()"><i class="fa-solid fa-angles-up fa-1x"></i>
+      <span class="tooltip-text" *ngIf="artPost?.upvotes >0">{{artPost?.upvotes ? artPost?.upvotes : 0}}</span>
+    </a>
+    <a class="reaction-down-vote" [ngClass]="{'active':userVote === 2,'text-tooltip':artPost?.downvotes>0}"
+      (click)="onDownvote()"><i class="fa-solid fa-angles-down fa-1x"></i>
+      <span class="tooltip-text" *ngIf="artPost?.downvotes >0">{{artPost?.downvotes ? artPost?.downvotes : 0}}</span>
+    </a>
+
+    <a class="reaction-share text-tooltip"><i class="fa-solid fa-share-nodes">
+        <span class="tooltip-text">Copy Link</span>
+      </i>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="row" >
+  <form [formGroup]="postForm">
+    <div class="col-12">
+      <textarea class="post-box" formControlName="description" name="post_one" id="post-one"
+        placeholder="Lets Publish The Arts..." cols="20" rows="5"></textarea>
+    </div>
+  </form>
+  <div class="col" [ngStyle]="{'padding-right': 'unset'}">
+    <input type="file" class="border upload" [(ngModel)]="mediaFile" (change)="onMediaChoosen($event)"
+      aria-label="choose jpg/png/jpeg">
+    <button class="publish" (click)="checkFormState()">Publish</button>
+  </div>
+</div>
+
+<ng-container *ngFor="let post of allArts">
+  <app-post-card [artPost]="post"></app-post-card>
+</ng-container>
